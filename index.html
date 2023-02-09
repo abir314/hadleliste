@@ -22,13 +22,15 @@
 
             let html = /*html*/ `
                        <h4>Add items to your cart -</h4>
-                       <input placeholder="items" type="text" value="" onchange="inputValue=this.value"/>
-                       <button onclick="add(inputValue)">Add</button><br/>
+                       <div>
+                            <input placeholder="items" type="text" value="" onchange="inputValue=this.value"/>
+                            <button style onclick="add(inputValue)">Add</button>
+                       </div><br/>
                        <div>Shopping Cart 🛒</div>
 
             `;
             for(i=0; i<handleList.length; i++) {
-                html += `<li>${handleList[i]} ${changeFelt[i] || ''}
+                html += `<br/><li>${handleList[i]} ${changeFelt[i] || ''}
                         <button onclick="change(${i})">Change</button>
                         <button onclick="deleted(${i})">Delete</button>
                         </li>`;
