@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        let infoDiv = document.getElementById('app');
+        let inputValue;
+        let handleList =[];
+        let changeFelt = [];
+        let changedValue = '';
+  
+
+        view();
+        function view() {
+            inputValue='';
+
+            let html = /*html*/ `
+                       <h4>Add items to your cart -</h4>
+                       <input placeholder="items" type="text" value="" onchange="inputValue=this.value"/>
+                       <button onclick="add(inputValue)">Add</button><br/>
+                       <div>Shopping Cart 🛒</div>
+
+            `;
+            for(i=0; i<handleList.length; i++) {
+                html += `<li>${handleList[i]} ${changeFelt[i] || ''}
+                        <button onclick="change(${i})">Change</button>
+                        <button onclick="deleted(${i})">Delete</button>
+                        </li>`;
+            }
+            infoDiv.innerHTML = html;
+
+        }
+    
+        function add(item){
+                if (!item=='') {
+                    handleList.push(item);
+                    changeFelt.push('');
+                }
+            view();
+
+        }
+        function change(index){
+            changedValue='';
+            
+            changeFelt[index] = `<input type="text" value="" 
+                                 onchange="changedValue=this.value; set(${index})"/> 
+                                `;
+            
+            view();
+        }
+        function set(index1){
+            changeFelt[index1] = '';
+            handleList[index1] = changedValue;
+            view();
+        }
+        function deleted(index){
+            handleList.splice(index, 1);
+            changeFelt.splice(index, 1)
+            view();
+        }
+    </script>
+</body>
+</html>
